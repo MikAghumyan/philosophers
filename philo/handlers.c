@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/01 14:32:37 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:46:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	handle_error(char *err_msg, t_data *data)
 		free(data->threads);
 		data->threads = NULL;
 	}
-	printf("fdf: %s", err_msg);
+	printf("philo: %s", err_msg);
 	exit(1);
 }

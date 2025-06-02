@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 00:09:36 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 00:59:10 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 # define DIED "died"
+# define USAGE \
+	"Usage: ./philo [number of philosophers] [time to die] [time to eat]\
+ [time to sleep] [number of times to eat each (optional)]\n"
 
 typedef struct s_data
 {
@@ -49,6 +52,7 @@ typedef struct s_philo
 
 void				handle_error(char *err_msg, t_data *data);
 
+bool				check_valid_args(char **argv);
 void				initialize_data(t_data *data, char **argv);
 
 unsigned int		ft_atoui(const char *nptr);
