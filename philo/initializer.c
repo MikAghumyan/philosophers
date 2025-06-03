@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 13:59:38 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:03:55 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	check_valid_args(char **argv)
 	return (false);
 }
 
-void	initialize_mutexes(t_data *data)
+short	initialize_mutexes(t_data *data)
 {
 	size_t	i;
 
@@ -39,22 +39,23 @@ void	initialize_mutexes(t_data *data)
 	while (++i < data->philos_num)
 	{
 		if (pthread_mutex_init(&data->mutexes[i], NULL))
-			handle_error("Error making mutex\n", data);
+			return (printf("fdf: Error making mutex\n"), 1);
 		data->mutex_count++;
 	}
+	return (0);
 }
 
-void	initialize_data(t_data *data, char **argv)
+short	initialize_data(t_data *data, char **argv)
 {
 	if (check_valid_args(argv))
-		handle_error(USAGE, NULL);
+		return (printf("fdf: %s", USAGE), 2);
 	data->philos_num = ft_atoui(argv[1]);
 	data->time_to_die = ft_atoui(argv[2]);
 	data->time_to_eat = ft_atoui(argv[3]);
 	data->time_to_sleep = ft_atoui(argv[4]);
 	if (!data->philos_num || !data->time_to_die || !data->time_to_eat
 		|| !data->time_to_sleep)
-		handle_error(USAGE, NULL);
+		return (printf("fdf: %s", USAGE), 2);
 	if (argv[5])
 		data->eats_num = ft_atoui(argv[5]);
 	else
@@ -63,6 +64,6 @@ void	initialize_data(t_data *data, char **argv)
 	data->mutexes = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* data->philos_num);
 	if (!data->mutexes || !data->threads)
-		handle_error("Memory allocation error\n", data);
-	initialize_mutexes(data);
+		return (printf("fdf: Memory allocation error\n"), 1);
+	return (initialize_mutexes(data));
 }

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 14:19:36 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:05:46 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct s_philo
 	t_data			*data;
 }					t_philo;
 
-void				handle_error(char *err_msg, t_data *data);
 void				handle_exit(t_data *data);
 
 bool				check_valid_args(char **argv);
-void				initialize_data(t_data *data, char **argv);
+short				initialize_mutexes(t_data *data);
+short				initialize_data(t_data *data, char **argv);
 
 unsigned int		ft_atoui(const char *nptr);
 
