@@ -10,6 +10,9 @@ OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
 
+debug: CFLAGS += -g
+debug: $(NAME)
+
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
@@ -21,4 +24,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
