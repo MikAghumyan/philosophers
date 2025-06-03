@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 15:03:55 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:41:28 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ short	initialize_mutexes(t_data *data)
 	return (0);
 }
 
-short	initialize_data(t_data *data, char **argv)
+short	initialize_data(t_data *data, t_philo **philos, char **argv)
 {
 	if (check_valid_args(argv))
 		return (printf("fdf: %s", USAGE), 2);
@@ -63,7 +63,8 @@ short	initialize_data(t_data *data, char **argv)
 	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philos_num);
 	data->mutexes = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* data->philos_num);
-	if (!data->mutexes || !data->threads)
+	*philos = (t_philo *)malloc(sizeof(t_philo) * data->philos_num);
+	if (!data->mutexes || !data->threads || !*philos)
 		return (printf("fdf: Memory allocation error\n"), 1);
 	return (initialize_mutexes(data));
 }
