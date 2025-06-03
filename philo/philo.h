@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 00:59:10 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:57:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	__useconds_t	time_to_sleep;
 	ssize_t			eats_num;
 	pthread_mutex_t	*mutexes;
+	size_t			mutex_count;
 	pthread_t		*threads;
 }					t_data;
 

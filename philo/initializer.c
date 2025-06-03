@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 00:56:24 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:59:38 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ bool	check_valid_args(char **argv)
 	return (false);
 }
 
+void	initialize_mutexes(t_data *data)
+{
+	size_t	i;
+
+	i = -1;
+	data->mutex_count = 0;
+	while (++i < data->philos_num)
+	{
+		if (pthread_mutex_init(&data->mutexes[i], NULL))
+			handle_error("Error making mutex\n", data);
+		data->mutex_count++;
+	}
+}
+
 void	initialize_data(t_data *data, char **argv)
 {
 	if (check_valid_args(argv))
@@ -45,8 +59,10 @@ void	initialize_data(t_data *data, char **argv)
 		data->eats_num = ft_atoui(argv[5]);
 	else
 		data->eats_num = -1;
-	data->threads = malloc(sizeof(pthread_t) * data->philos_num);
-	data->mutexes = malloc(sizeof(pthread_mutex_t) * data->philos_num);
+	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->philos_num);
+	data->mutexes = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* data->philos_num);
 	if (!data->mutexes || !data->threads)
 		handle_error("Memory allocation error\n", data);
+	initialize_mutexes(data);
 }
