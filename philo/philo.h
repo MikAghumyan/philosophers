@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 16:47:03 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:46:31 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,27 @@
 
 typedef struct s_data
 {
-	unsigned int	philos_num;
+	size_t			philos_num;
 	__useconds_t	time_to_die;
 	__useconds_t	time_to_eat;
 	__useconds_t	time_to_sleep;
 	ssize_t			eats_num;
 	pthread_mutex_t	*mutexes;
+	pthread_mutex_t	print_mutex;
 	size_t			mutex_count;
 	pthread_t		*threads;
 }					t_data;
 
 typedef struct s_philo
 {
-	unsigned int	philo_id;
+	size_t			philo_id;
+	pthread_mutex_t	*fork1;
+	pthread_mutex_t	*fork2;
 	t_data			*data;
 }					t_philo;
 
 void				handle_exit(t_data *data, t_philo **philos);
+bool				print_handler(t_philo *philo, char *msg);
 
 bool				check_valid_args(char **argv);
 short				initialize_mutexes(t_data *data);
@@ -62,6 +66,8 @@ short				initialize_threads(t_data *data, t_philo **philos);
 short				join_threads(t_data *data);
 void				*start_philo(void *args);
 
+int					ft_isdigit(int c);
 unsigned int		ft_atoui(const char *nptr);
+size_t				get_current_time(void);
 
 #endif

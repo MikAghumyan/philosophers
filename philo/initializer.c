@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 16:41:28 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/03 19:39:29 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@ bool	check_valid_args(char **argv)
 	{
 		j = -1;
 		while (argv[i][++j])
-		{
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-			{
+			if (!ft_isdigit(argv[i][j]))
 				return (true);
-			}
-		}
 	}
 	return (false);
 }
@@ -42,6 +38,8 @@ short	initialize_mutexes(t_data *data)
 			return (printf("fdf: Error making mutex\n"), 1);
 		data->mutex_count++;
 	}
+	if (pthread_mutex_init(&data->print_mutex, NULL))
+		return (printf("fdf: Error making mutex\n"), 1);
 	return (0);
 }
 
