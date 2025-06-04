@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:33:57 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 15:12:58 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:36:59 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,17 @@ void	*start_philo(void *args)
 
 	philo = (t_philo *)args;
 	data = philo->data;
-	print_handler(philo, THINK);
-	pthread_mutex_lock(philo->fork1);
-	print_handler(philo, FORK);
-	pthread_mutex_lock(philo->fork2);
-	print_handler(philo, FORK);
+	while (true)
+	{
+		if (handle_think(philo, data))
+			break ;
+		if (handle_forks(philo, data))
+			break ;
+		ft_usleep(data->time_to_eat);
+		pthread_mutex_unlock(philo->fork1);
+		pthread_mutex_unlock(philo->fork2);
+		if (handle_sleep(philo, data))
+			break ;
+	}
 	return (0);
 }

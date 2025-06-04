@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 15:29:34 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:36:45 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ short				initialize_data(t_data *data, t_philo **philos,
 short				initialize_mutexes(t_data *data);
 short				initialize_threads(t_data *data, t_philo **philos);
 short				initialize_forks(t_data *data, t_philo *philo);
+
+short				handle_think(t_philo *philo, t_data *data);
+short				handle_sleep(t_philo *philo, t_data *data);
+short				handle_forks(t_philo *philo, t_data *data);
 
 short				join_threads(t_data *data);
 void				*start_philo(void *args);

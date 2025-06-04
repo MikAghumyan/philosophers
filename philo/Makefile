@@ -5,7 +5,8 @@ SRCS=handlers.c \
 		main.c \
 		initializer.c \
 		utils.c \
-		philo.c
+		philo.c \
+		philo_routine.c
 
 OBJS=$(SRCS:.c=.o)
 
