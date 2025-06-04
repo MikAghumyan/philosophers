@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:45:26 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 15:19:56 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;
 
-	start = get_current_time();
-	while ((get_current_time() - start) < milliseconds)
+	start = get_currtime();
+	while ((get_currtime() - start) < milliseconds)
 		usleep(500);
 	return (0);
 }
 
-size_t	get_current_time(void)
+size_t	get_currtime(void)
 {
 	struct timeval	time;
 

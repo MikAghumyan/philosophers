@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:33:57 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 18:28:18 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:50:36 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,35 @@ short	join_threads(t_data *data)
 	i = 0;
 	while (i < data->philos_num)
 		pthread_join(data->threads[i++], NULL);
+	return (0);
+}
+
+short	monitor_routine(t_data *data, t_philo **philos)
+{
+	size_t	i;
+	size_t	count_ended;
+
+	while (!data->stopped)
+	{
+		i = -1;
+		count_ended = 0;
+		while (++i < data->philos_num)
+		{
+			pthread_mutex_lock(&data->stop_mutex);
+			if ((*philos)[i].ended)
+				count_ended++;
+			else if (get_currtime() - (*philos)[i].last_eat > data->time_to_die)
+			{
+				data->stopped = true;
+				print_handler((*philos + i), DIED);
+				pthread_mutex_unlock(&data->stop_mutex);
+				break ;
+			}
+			pthread_mutex_unlock(&data->stop_mutex);
+		}
+		if (count_ended == data->philos_num)
+			break ;
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 19:01:10 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_philo
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
 	size_t			eat_counter;
+	size_t			last_eat;
+	bool			ended;
 	t_data			*data;
 }					t_philo;
 
@@ -77,10 +79,11 @@ short				handle_forks(t_philo *philo, t_data *data);
 
 short				join_threads(t_data *data);
 void				*start_philo(void *args);
+short				monitor_routine(t_data *data, t_philo **philo);
 
 int					ft_isdigit(int c);
 unsigned int		ft_atoui(const char *nptr);
-size_t				get_current_time(void);
+size_t				get_currtime(void);
 int					ft_usleep(size_t milliseconds);
 
 #endif

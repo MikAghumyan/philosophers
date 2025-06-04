@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 19:29:37 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool	validation_handler(char **argv)
 bool	print_handler(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%zu %zu %s\n", get_current_time() - philo->data->start_time,
+	printf("%zu %zu %s\n", get_currtime() - philo->data->start_time,
 		philo->philo_id, msg);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	return (false);

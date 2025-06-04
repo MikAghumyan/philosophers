@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 18:45:59 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ short	handle_eat(t_philo *philo, t_data *data)
 	if (data->stopped)
 		return (pthread_mutex_unlock(&data->stop_mutex), 1);
 	print_handler(philo, EAT);
-	pthread_mutex_unlock(&data->stop_mutex);
+	philo->last_eat = get_currtime();
 	philo->eat_counter++;
 	if (data->eats_num > 0 && philo->eat_counter >= (size_t)data->eats_num)
 	{
+		philo->ended = true;
+		pthread_mutex_unlock(&data->stop_mutex);
 		pthread_mutex_unlock(philo->fork1);
 		pthread_mutex_unlock(philo->fork2);
 		return (1);
 	}
+	pthread_mutex_unlock(&data->stop_mutex);
 	ft_usleep(data->time_to_eat);
 	pthread_mutex_unlock(philo->fork1);
 	pthread_mutex_unlock(philo->fork2);

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 19:29:22 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@ short	initialize_threads(t_data *data, t_philo **philos)
 {
 	size_t	i;
 
-	data->start_time = get_current_time();
+	data->start_time = get_currtime();
 	i = -1;
 	while (++i < data->philos_num)
 	{
 		(*philos)[i].data = data;
 		(*philos)[i].philo_id = i;
 		(*philos)[i].eat_counter = 0;
+		(*philos)[i].last_eat = get_currtime();
+		(*philos)[i].ended = false;
 		initialize_forks(data, (*philos + i));
 		pthread_create(&data->threads[i], NULL, start_philo, (*philos + i));
 	}
