@@ -40,6 +40,7 @@ typedef struct s_data
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
 	ssize_t			eats_num;
+	ssize_t			start_time;
 
 	bool			stopped;
 

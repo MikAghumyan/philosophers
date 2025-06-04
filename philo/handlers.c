@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 15:14:02 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:29:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	handle_exit(t_data *data, t_philo **philos)
 		while (data->mutex_count--)
 			pthread_mutex_destroy(&data->mutexes[data->mutex_count]);
 		pthread_mutex_destroy(&data->print_mutex);
+		pthread_mutex_destroy(&data->stop_mutex);
 		free(data->mutexes);
 		data->mutexes = NULL;
 		free(data->threads);
@@ -48,7 +49,8 @@ bool	validation_handler(char **argv)
 bool	print_handler(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%zu %zu %s\n", get_current_time(), philo->philo_id, msg);
+	printf("%zu %zu %s\n", get_current_time() - philo->data->start_time,
+		philo->philo_id, msg);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	return (false);
 }
