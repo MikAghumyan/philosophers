@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 16:38:07 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 18:45:59 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ short	handle_sleep(t_philo *philo, t_data *data)
 	ft_usleep(data->time_to_sleep);
 	return (0);
 }
+short	handle_eat(t_philo *philo, t_data *data)
+{
+	pthread_mutex_lock(&data->stop_mutex);
+	if (data->stopped)
+		return (pthread_mutex_unlock(&data->stop_mutex), 1);
+	print_handler(philo, EAT);
+	pthread_mutex_unlock(&data->stop_mutex);
+	philo->eat_counter++;
+	if (data->eats_num > 0 && philo->eat_counter >= (size_t)data->eats_num)
+	{
+		pthread_mutex_unlock(philo->fork1);
+		pthread_mutex_unlock(philo->fork2);
+		return (1);
+	}
+	ft_usleep(data->time_to_eat);
+	pthread_mutex_unlock(philo->fork1);
+	pthread_mutex_unlock(philo->fork2);
+	return (0);
+}
 
 short	handle_forks(t_philo *philo, t_data *data)
 {
@@ -55,7 +74,6 @@ short	handle_forks(t_philo *philo, t_data *data)
 		return (1);
 	}
 	print_handler(philo, FORK);
-	print_handler(philo, EAT);
 	pthread_mutex_unlock(&data->stop_mutex);
 	return (0);
 }

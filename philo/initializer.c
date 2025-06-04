@@ -42,6 +42,7 @@ short	initialize_threads(t_data *data, t_philo **philos)
 	{
 		(*philos)[i].data = data;
 		(*philos)[i].philo_id = i;
+		(*philos)[i].eat_counter = 0;
 		initialize_forks(data, (*philos + i));
 		pthread_create(&data->threads[i], NULL, start_philo, (*philos + i));
 	}

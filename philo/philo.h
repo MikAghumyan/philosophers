@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 16:36:45 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:01:10 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philo
 	size_t			philo_id;
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
+	size_t			eat_counter;
 	t_data			*data;
 }					t_philo;
 
@@ -69,6 +70,7 @@ short				initialize_mutexes(t_data *data);
 short				initialize_threads(t_data *data, t_philo **philos);
 short				initialize_forks(t_data *data, t_philo *philo);
 
+short				handle_eat(t_philo *philo, t_data *data);
 short				handle_think(t_philo *philo, t_data *data);
 short				handle_sleep(t_philo *philo, t_data *data);
 short				handle_forks(t_philo *philo, t_data *data);
