@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 19:46:31 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:29:34 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@
 typedef struct s_data
 {
 	size_t			philos_num;
-	__useconds_t	time_to_die;
-	__useconds_t	time_to_eat;
-	__useconds_t	time_to_sleep;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
 	ssize_t			eats_num;
+
+	bool			stopped;
+
 	pthread_mutex_t	*mutexes;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	stop_mutex;
 	size_t			mutex_count;
 	pthread_t		*threads;
 }					t_data;
@@ -55,19 +59,21 @@ typedef struct s_philo
 }					t_philo;
 
 void				handle_exit(t_data *data, t_philo **philos);
+bool				validation_handler(char **argv);
 bool				print_handler(t_philo *philo, char *msg);
 
-bool				check_valid_args(char **argv);
-short				initialize_mutexes(t_data *data);
 short				initialize_data(t_data *data, t_philo **philos,
 						char **argv);
-
+short				initialize_mutexes(t_data *data);
 short				initialize_threads(t_data *data, t_philo **philos);
+short				initialize_forks(t_data *data, t_philo *philo);
+
 short				join_threads(t_data *data);
 void				*start_philo(void *args);
 
 int					ft_isdigit(int c);
 unsigned int		ft_atoui(const char *nptr);
 size_t				get_current_time(void);
+int					ft_usleep(size_t milliseconds);
 
 #endif

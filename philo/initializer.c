@@ -6,24 +6,42 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 19:39:29 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:31:06 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	check_valid_args(char **argv)
+short	initialize_forks(t_data *data, t_philo *philo)
 {
-	int i, j;
-	i = 0;
-	while (argv[++i])
+	if (philo->philo_id % 2)
 	{
-		j = -1;
-		while (argv[i][++j])
-			if (!ft_isdigit(argv[i][j]))
-				return (true);
+		philo->fork1 = &data->mutexes[(philo->philo_id + data->philos_num - 1)
+			% data->philos_num];
+		philo->fork2 = &data->mutexes[data->philos_num];
 	}
-	return (false);
+	else
+	{
+		philo->fork1 = &data->mutexes[data->philos_num];
+		philo->fork2 = &data->mutexes[(philo->philo_id + data->philos_num - 1)
+			% data->philos_num];
+	}
+	return (0);
+}
+
+short	initialize_threads(t_data *data, t_philo **philos)
+{
+	size_t	i;
+
+	i = -1;
+	while (++i < data->philos_num)
+	{
+		(*philos)[i].data = data;
+		(*philos)[i].philo_id = i;
+		initialize_forks(data, (*philos + i));
+		pthread_create(&data->threads[i], NULL, start_philo, (*philos + i));
+	}
+	return (0);
 }
 
 short	initialize_mutexes(t_data *data)
@@ -40,12 +58,14 @@ short	initialize_mutexes(t_data *data)
 	}
 	if (pthread_mutex_init(&data->print_mutex, NULL))
 		return (printf("fdf: Error making mutex\n"), 1);
+	if (pthread_mutex_init(&data->stop_mutex, NULL))
+		return (printf("fdf: Error making mutex\n"), 1);
 	return (0);
 }
 
 short	initialize_data(t_data *data, t_philo **philos, char **argv)
 {
-	if (check_valid_args(argv))
+	if (validation_handler(argv))
 		return (printf("fdf: %s", USAGE), 2);
 	data->philos_num = ft_atoui(argv[1]);
 	data->time_to_die = ft_atoui(argv[2]);
@@ -64,5 +84,6 @@ short	initialize_data(t_data *data, t_philo **philos, char **argv)
 	*philos = (t_philo *)malloc(sizeof(t_philo) * data->philos_num);
 	if (!data->mutexes || !data->threads || !*philos)
 		return (printf("fdf: Memory allocation error\n"), 1);
+	data->stopped = false;
 	return (initialize_mutexes(data));
 }

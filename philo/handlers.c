@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/03 21:18:25 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:14:02 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ void	handle_exit(t_data *data, t_philo **philos)
 		free(*philos);
 		*philos = NULL;
 	}
+}
+
+bool	validation_handler(char **argv)
+{
+	int i, j;
+	i = 0;
+	while (argv[++i])
+	{
+		j = -1;
+		while (argv[i][++j])
+			if (!ft_isdigit(argv[i][j]))
+				return (true);
+	}
+	return (false);
 }
 
 bool	print_handler(t_philo *philo, char *msg)
