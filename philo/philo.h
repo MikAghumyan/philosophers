@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 12:42:31 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:36:04 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork1;
 	pthread_mutex_t	*fork2;
 	size_t			eat_counter;
+	pthread_mutex_t	meal_mutex;
 	size_t			last_eat;
 	bool			ended;
 	t_data			*data;

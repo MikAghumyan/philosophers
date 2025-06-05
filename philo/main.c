@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:18:12 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 21:42:28 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:44:10 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 	else if (exit_status == 2)
 		return (handle_exit(NULL, NULL), exit_status);
 	exit_status = initialize_threads(&data, &philos);
+	if (exit_status == 1)
+		return (handle_exit(&data, &philos), exit_status);
 	monitor_routine(&data, &philos);
 	join_threads(&data);
 	handle_exit(&data, &philos);

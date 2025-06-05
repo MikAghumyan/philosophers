@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:47:44 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	handle_exit(t_data *data, t_philo **philos)
 {
+	size_t	i;
+
 	if (data)
 	{
 		while (data->mutex_count--)
@@ -27,6 +29,9 @@ void	handle_exit(t_data *data, t_philo **philos)
 	}
 	if (philos)
 	{
+		i = -1;
+		while (++i < data->philos_num)
+			pthread_mutex_destroy(&(*philos)[i].meal_mutex);
 		free(*philos);
 		*philos = NULL;
 	}
@@ -50,7 +55,7 @@ bool	print_handler(t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("%zu %zu %s\n", get_currtime() - philo->data->start_time,
-		philo->philo_id, msg);
+		philo->philo_id + 1, msg);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	return (false);
 }

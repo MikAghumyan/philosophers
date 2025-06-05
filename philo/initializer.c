@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:42:49 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:36:44 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ short	initialize_threads(t_data *data, t_philo **philos)
 		(*philos)[i].eat_counter = 0;
 		(*philos)[i].last_eat = get_currtime();
 		(*philos)[i].ended = false;
+		if (pthread_mutex_init(&((*philos)[i].meal_mutex), NULL))
+			return (-1);
 		initialize_forks(data, (*philos + i));
 		pthread_create(&data->threads[i], NULL, start_philo, (*philos + i));
 	}

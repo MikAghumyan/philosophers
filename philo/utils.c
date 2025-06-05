@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:45:26 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:51 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:03:29 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_currtime();
 	while ((get_currtime() - start) < milliseconds)
-		usleep(500);
+		usleep(100);
 	return (0);
 }
 
