@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/05 16:10:05 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:29:52 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ short	handle_forks(t_philo *philo, t_data *data)
 	if (data->stopped)
 	{
 		pthread_mutex_unlock(&data->stop_mutex);
-		pthread_mutex_unlock(philo->fork1);
 		pthread_mutex_unlock(philo->fork2);
+		pthread_mutex_unlock(philo->fork1);
 		return (1);
 	}
 	print_handler(philo, FORK);
