@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/05 16:29:52 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:45:46 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ short	handle_forks(t_philo *philo, t_data *data)
 	}
 	print_handler(philo, FORK);
 	pthread_mutex_unlock(&data->stop_mutex);
+	if (philo->fork1 == philo->fork2)
+		return (handle_one_philo(philo, data));
 	pthread_mutex_lock(philo->fork2);
 	pthread_mutex_lock(&data->stop_mutex);
 	if (data->stopped)
@@ -77,4 +79,20 @@ short	handle_forks(t_philo *philo, t_data *data)
 	print_handler(philo, FORK);
 	pthread_mutex_unlock(&data->stop_mutex);
 	return (0);
+}
+
+short	handle_one_philo(t_philo *philo, t_data *data)
+{
+	while (true)
+	{
+		pthread_mutex_lock(&data->stop_mutex);
+		if (data->stopped)
+		{
+			pthread_mutex_unlock(&data->stop_mutex);
+			pthread_mutex_unlock(philo->fork1);
+			break ;
+		}
+		pthread_mutex_unlock(&data->stop_mutex);
+	}
+	return (1);
 }
