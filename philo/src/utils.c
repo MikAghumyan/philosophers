@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:45:26 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/05 12:03:29 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 int	ft_usleep(size_t milliseconds)
 {

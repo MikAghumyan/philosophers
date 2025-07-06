@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/04 14:45:46 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 short	handle_think(t_philo *philo, t_data *data)
 {

@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:18:12 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/05 15:44:10 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/07 00:05:31 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "./inc/philo.h"
 
 int	main(int argc, char **argv)
 {

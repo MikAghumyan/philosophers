@@ -1,12 +1,12 @@
 CC=cc
 CFLAGS=-Wall -Wextra -Werror -pthread
 NAME=philo
-SRCS=handlers.c \
-		main.c \
-		initializer.c \
-		utils.c \
-		philo.c \
-		philo_routine.c
+SRCS=	main.c \
+		src/handlers.c \
+		src/initializer.c \
+		src/utils.c \
+		src/philo.c \
+		src/philo_routine.c
 
 OBJS=$(SRCS:.c=.o)
 

@@ -6,11 +6,11 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:33:57 by maghumya          #+#    #+#             */
-/*   Updated: 2025/06/05 17:16:27 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 static bool	check_philo_dead(t_philo *philo, t_data *data, size_t *count_ended)
 {
