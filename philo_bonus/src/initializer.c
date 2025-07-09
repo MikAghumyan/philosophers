@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:36:54 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/09 18:30:37 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/09 19:57:01 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ short	initialize_processes(t_data *data)
 			data->pid_arr[i] = pid_tmp;
 		else
 		{
-			printf("child process %ld\n", i);
+			start_philo(data, i);
 			exit(0);
 		}
 	}
@@ -53,9 +53,13 @@ short	initialize_data(t_data *data, char **argv)
 	sem_unlink("/forks");
 	sem_unlink("/write_lock");
 	sem_unlink("/stop_sim");
+	sem_unlink("/philos_finished");
+	sem_unlink("/print_lock");
 	data->forks_sem = sem_open("/forks", O_CREAT, 0644, data->philos_num);
 	data->write_sem = sem_open("/write_lock", O_CREAT, 0644, 1);
 	data->write_sem = sem_open("/stop_sim", O_CREAT, 0644, 0);
+	data->write_sem = sem_open("/philos_finished", O_CREAT, 0644);
+	data->write_sem = sem_open("/print_lock", O_CREAT, 0644, 1);
 	data->pid_arr = (pid_t *)malloc(sizeof(pid_t) * data->philos_num);
 	if (!data->pid_arr)
 		return (2);
