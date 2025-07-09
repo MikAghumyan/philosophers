@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:57:47 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/08 15:37:11 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:17:26 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	sem_t		*forks_sem;
 	sem_t		*write_sem;
 	sem_t		*stop_sem;
+	pid_t		*pid_arr;
 }				t_data;
 
 int				ft_usleep(size_t milliseconds);
@@ -53,7 +54,9 @@ int				ft_isdigit(int c);
 unsigned int	ft_atoui(const char *nptr);
 
 short			initialize_data(t_data *data, char **argv);
+short			initialize_processes(t_data *data);
 
 bool			validation_handler(char **argv);
+void			handle_exit(t_data *data, short exit_status);
 
 #endif

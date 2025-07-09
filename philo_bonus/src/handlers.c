@@ -6,11 +6,17 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/07 00:39:49 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:17:01 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+void	handle_exit(t_data *data, short exit_status)
+{
+	free(data->pid_arr);
+	exit(exit_status);
+}
 
 bool	validation_handler(char **argv)
 {

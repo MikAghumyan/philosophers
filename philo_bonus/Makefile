@@ -4,7 +4,7 @@ NAME=philo
 SRCS=	main.c \
 		src/utils.c \
 		src/initializer.c \
-		# src/handlers.c \
+		src/handlers.c \
 
 OBJS=$(SRCS:.c=.o)
 
