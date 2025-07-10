@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:57:47 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/09 19:57:14 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/10 20:48:40 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_philo
 	size_t			philo_id;
 	size_t			eat_counter;
 	pthread_mutex_t	meal_mutex;
+	pthread_mutex_t	stop_mutex;
 	size_t			last_eat;
 	bool			ended;
 	t_data			*data;
@@ -69,8 +70,13 @@ short				initialize_data(t_data *data, char **argv);
 short				initialize_processes(t_data *data);
 
 bool				validation_handler(char **argv);
-void				print_handler(t_data *data, t_philo *philo, char *msg);
+bool				print_handler(t_data *data, t_philo *philo, char *msg);
 void				handle_exit(t_data *data, short exit_status);
 
 short				start_philo(t_data *data, size_t id);
+
+bool				handle_forks(t_data *data, t_philo *philo);
+bool				handle_eat(t_data *data, t_philo *philo);
+bool				handle_think(t_data *data, t_philo *philo);
+bool				handle_sleep(t_data *data, t_philo *philo);
 #endif

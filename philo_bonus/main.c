@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:09:43 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/09 18:18:51 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/10 20:49:44 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	exit_status = initialize_processes(&data);
 	if (exit_status)
 		handle_exit(&data, exit_status);
+	sem_wait(data.stop_sem);
 	handle_exit(&data, 0);
 	return (0);
 }
