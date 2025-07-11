@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 20:02:36 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/10 21:50:35 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:08:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ bool	handle_forks(t_data *data, t_philo *philo)
 
 bool	handle_eat(t_data *data, t_philo *philo)
 {
-	pthread_mutex_lock(&philo->meal_mutex);
+	sem_wait(data->meal_sem);
 	philo->last_eat = get_currtime();
 	if (data->eats_num > 0)
 		philo->eat_counter++;
-	pthread_mutex_unlock(&philo->meal_mutex);
+	sem_post(data->meal_sem);
 	if (print_handler(data, philo, EAT))
 	{
 		sem_post(data->forks_sem);

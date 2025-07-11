@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:36:54 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/10 21:52:15 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:08:14 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ short	initialize_data(t_data *data, char **argv)
 	sem_unlink("/stop_sim");
 	sem_unlink("/philos_finished");
 	sem_unlink("/print_lock");
+	sem_unlink("/meal_lock");
 	data->forks_sem = sem_open("/forks", O_CREAT, 0644, data->philos_num);
 	data->write_sem = sem_open("/write_lock", O_CREAT, 0644, 1);
 	data->stop_sem = sem_open("/stop_sim", O_CREAT, 0644, 0);
-	data->philos_finished_sem = sem_open("/philos_finished", O_CREAT, 0644);
+	data->philos_finished_sem = sem_open("/philos_finished", O_CREAT, 0644, 0);
 	data->print_sem = sem_open("/print_lock", O_CREAT, 0644, 1);
+	data->meal_sem = sem_open("/meal_lock", O_CREAT, 0644, 1);
 	data->pid_arr = (pid_t *)malloc(sizeof(pid_t) * data->philos_num);
 	if (!data->pid_arr)
 		return (2);
