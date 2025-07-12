@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/12 14:41:34 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:16:11 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handle_finish(t_data *data)
 	i = -1;
 	while (++i < data->philos_num)
 		waitpid(data->pid_arr[i], NULL, 0);
-	if (data->time_to_eat > 0)
+	if (data->eats_num > 0)
 		pthread_join(data->monitor_thread, NULL);
 	handle_exit(data, 0);
 }

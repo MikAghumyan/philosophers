@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:09:43 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/12 14:38:35 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:14:33 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	exit_status = initialize_processes(&data);
 	if (exit_status)
 		handle_exit(&data, exit_status);
-	if (data.time_to_eat > 0)
+	if (data.eats_num > 0)
 		pthread_create(&data.monitor_thread, NULL, main_monitor_handler, &data);
 	handle_finish(&data);
 	return (0);

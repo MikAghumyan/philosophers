@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:49:40 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/12 14:30:32 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:15:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*philo_monitor(void *args)
 			philo->ended = true;
 			sem_post(philo->data->philos_finished_sem);
 			sem_post(philo->data->meal_sem);
-			return (0);
+			break ;
 		}
 		if (get_currtime() - philo->last_eat > philo->data->time_to_die)
 		{
@@ -34,11 +34,12 @@ void	*philo_monitor(void *args)
 			printf("%zu %zu %s\n", get_currtime() - philo->data->start_time,
 				philo->philo_id + 1, DIED);
 			sem_post(philo->data->stop_sem);
-			exit(1);
+			break ;
 		}
 		sem_post(philo->data->meal_sem);
 		usleep(100);
 	}
+	return (NULL);
 }
 
 short	philo_routine(t_data *data, t_philo *philo)
@@ -70,11 +71,5 @@ short	start_philo(t_data *data, size_t id)
 	pthread_create(&monitor_thread, NULL, philo_monitor, &philo);
 	philo_routine(data, &philo);
 	pthread_join(monitor_thread, NULL);
-	sem_close(data->meal_sem);
-	sem_close(data->forks_sem);
-	sem_close(data->write_sem);
-	sem_close(data->stop_sem);
-	sem_close(data->philos_finished_sem);
-	sem_close(data->print_sem);
 	return (0);
 }

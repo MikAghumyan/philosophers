@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:36:54 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/12 14:34:54 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:36:14 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ short	initialize_processes(t_data *data)
 		else
 		{
 			start_philo(data, i);
+			sem_close(data->meal_sem);
+			sem_close(data->forks_sem);
+			sem_close(data->write_sem);
+			sem_close(data->stop_sem);
+			sem_close(data->philos_finished_sem);
+			sem_close(data->print_sem);
 			exit(0);
 		}
 	}

@@ -1,6 +1,6 @@
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
-NAME=philo
+NAME=philo_bonus
 SRCS=	main.c \
 		src/utils.c \
 		src/initializer.c \
