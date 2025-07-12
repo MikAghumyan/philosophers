@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:27:37 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	handle_exit(t_data *data, t_philo **philos)
 
 bool	validation_handler(char **argv)
 {
-	int i, j;
+	int	i;
+	int	j;
+
 	i = 0;
 	while (argv[++i])
 	{

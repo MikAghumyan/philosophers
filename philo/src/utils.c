@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:45:26 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:27:16 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	ft_isdigit(int c)
 
 unsigned int	ft_atoui(const char *nptr)
 {
-	int i;
-	int result;
+	int	i;
+	int	result;
 
 	i = 0;
 	result = 0;

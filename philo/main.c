@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:18:12 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/07 00:05:31 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:26:52 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_data data;
-	t_philo *philos;
-	short exit_status;
+	t_data	data;
+	t_philo	*philos;
+	short	exit_status;
 
 	if (argc < 5 || argc > 6)
 		return (printf("philo: %s", USAGE), 1);

@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:18:01 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/07 00:04:20 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:28:15 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ short	handle_sleep(t_philo *philo, t_data *data)
 	ft_usleep(data->time_to_sleep);
 	return (0);
 }
+
 short	handle_eat(t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock(&philo->meal_mutex);
