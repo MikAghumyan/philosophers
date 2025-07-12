@@ -6,11 +6,40 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 00:36:54 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/11 18:08:14 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 14:34:54 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+short	initialize_semaphores(t_data *data)
+{
+	sem_unlink("/forks");
+	sem_unlink("/write_lock");
+	sem_unlink("/stop_sim");
+	sem_unlink("/philos_finished");
+	sem_unlink("/print_lock");
+	sem_unlink("/meal_lock");
+	data->forks_sem = sem_open("/forks", O_CREAT, 0644, data->philos_num);
+	if (data->forks_sem == SEM_FAILED)
+		return (1);
+	data->write_sem = sem_open("/write_lock", O_CREAT, 0644, 1);
+	if (data->write_sem == SEM_FAILED)
+		return (1);
+	data->stop_sem = sem_open("/stop_sim", O_CREAT, 0644, 0);
+	if (data->stop_sem == SEM_FAILED)
+		return (1);
+	data->philos_finished_sem = sem_open("/philos_finished", O_CREAT, 0644, 0);
+	if (data->philos_finished_sem == SEM_FAILED)
+		return (1);
+	data->print_sem = sem_open("/print_lock", O_CREAT, 0644, 1);
+	if (data->print_sem == SEM_FAILED)
+		return (1);
+	data->meal_sem = sem_open("/meal_lock", O_CREAT, 0644, 1);
+	if (data->meal_sem == SEM_FAILED)
+		return (1);
+	return (0);
+}
 
 short	initialize_processes(t_data *data)
 {
@@ -50,18 +79,10 @@ short	initialize_data(t_data *data, char **argv)
 	if (!data->philos_num || !data->time_to_die || !data->time_to_eat
 		|| !data->time_to_sleep || !data->eats_num)
 		return (printf("philo: %s", USAGE), 2);
-	sem_unlink("/forks");
-	sem_unlink("/write_lock");
-	sem_unlink("/stop_sim");
-	sem_unlink("/philos_finished");
-	sem_unlink("/print_lock");
-	sem_unlink("/meal_lock");
-	data->forks_sem = sem_open("/forks", O_CREAT, 0644, data->philos_num);
-	data->write_sem = sem_open("/write_lock", O_CREAT, 0644, 1);
-	data->stop_sem = sem_open("/stop_sim", O_CREAT, 0644, 0);
-	data->philos_finished_sem = sem_open("/philos_finished", O_CREAT, 0644, 0);
-	data->print_sem = sem_open("/print_lock", O_CREAT, 0644, 1);
-	data->meal_sem = sem_open("/meal_lock", O_CREAT, 0644, 1);
+	if (data->philos_num > 200)
+		return (printf("philo: too many philosophers\n"), 2);
+	if (initialize_semaphores(data))
+		return (printf("philo: semaphore initialization failed\n"), 2);
 	data->pid_arr = (pid_t *)malloc(sizeof(pid_t) * data->philos_num);
 	if (!data->pid_arr)
 		return (2);

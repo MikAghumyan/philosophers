@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 13:26:22 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/11 20:56:46 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 14:41:34 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 void	handle_exit(t_data *data, short exit_status)
 {
-	free(data->pid_arr);
+	sem_close(data->forks_sem);
+	sem_close(data->write_sem);
+	sem_close(data->stop_sem);
+	sem_close(data->philos_finished_sem);
+	sem_close(data->print_sem);
+	sem_close(data->meal_sem);
 	sem_unlink("/forks");
 	sem_unlink("/write_lock");
 	sem_unlink("/stop_sim");
 	sem_unlink("/philos_finished");
 	sem_unlink("/print_lock");
 	sem_unlink("/meal_lock");
+	free(data->pid_arr);
 	exit(exit_status);
 }
 
@@ -41,6 +47,22 @@ void	handle_finish(t_data *data)
 	if (data->time_to_eat > 0)
 		pthread_join(data->monitor_thread, NULL);
 	handle_exit(data, 0);
+}
+
+void	*main_monitor_handler(void *args)
+{
+	t_data	*data;
+	size_t	i;
+
+	data = (t_data *)args;
+	i = -1;
+	while (++i < data->philos_num)
+	{
+		sem_wait(data->philos_finished_sem);
+	}
+	sem_post(data->stop_sem);
+	i = -1;
+	return (0);
 }
 
 bool	print_handler(t_data *data, t_philo *philo, char *msg)

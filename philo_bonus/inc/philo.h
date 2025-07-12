@@ -6,7 +6,7 @@
 /*   By: maghumya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 23:57:47 by maghumya          #+#    #+#             */
-/*   Updated: 2025/07/11 20:54:04 by maghumya         ###   ########.fr       */
+/*   Updated: 2025/07/12 14:38:26 by maghumya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ size_t			get_currtime(void);
 int				ft_isdigit(int c);
 unsigned int	ft_atoui(const char *nptr);
 
+short			initialize_semaphores(t_data *data);
 short			initialize_data(t_data *data, char **argv);
 short			initialize_processes(t_data *data);
 
@@ -76,8 +77,7 @@ bool			validation_handler(char **argv);
 bool			print_handler(t_data *data, t_philo *philo, char *msg);
 void			handle_exit(t_data *data, short exit_status);
 void			handle_finish(t_data *data);
-
-void			*monitor_finished(void *args);
+void			*main_monitor_handler(void *args);
 
 void			*philo_monitor(void *args);
 short			start_philo(t_data *data, size_t id);

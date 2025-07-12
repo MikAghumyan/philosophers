@@ -7,7 +7,6 @@ SRCS=	main.c \
 		src/handlers.c \
 		src/philo.c \
 		src/philo_actions.c \
-		src/monitor.c \
 
 OBJS=$(SRCS:.c=.o)
 
